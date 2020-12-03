@@ -122,5 +122,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = Path.joinpath(BASE_DIR, 'static')
 # print(BASE_DIR, "base directory")
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
-
-MEDIA_URL = '/media/'
+MEDIA_URL = '/dummy/'
