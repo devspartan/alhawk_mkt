@@ -8,10 +8,6 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
-
-
-
-
     <div class="container">
         <br>
         <div class="card bg-light">
@@ -26,47 +22,48 @@
                 <p class="divider-text">
                     <span class="bg-light">OR</span>
                 </p>
-                <form>
+                <form  method="post">
+                    {% csrf_token %}
+
+
+                    <div class="alert alert-danger" role="alert">{{ error }}</div>
+
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                         </div>
-                        <input name="" class="form-control" placeholder="Full name" type="text">
+                        {{ form.full_name }}
                     </div> <!-- form-group// -->
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                         </div>
-                        <input name="" class="form-control" placeholder="Email address" type="email">
+                        {{ form.email }}
+{#                        {{ form.email.errors }}#}
                     </div> <!-- form-group// -->
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                         </div>
-                        <select class="custom-select" style="max-width: 90px;">
-                            <option selected="91">+91</option>
-                            <option value="972">+972</option>
-                            <option value="2">+198</option>
-                            <option value="3">+701</option>
-                        </select>
-                        <input name="" class="form-control" placeholder="Phone number" type="text">
+                        {{ form.phone_num }}
                     </div> <!-- form-group// -->
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                         </div>
-                        <input class="form-control" placeholder="Create password" type="password">
+                        {{ form.password }}
+
                     </div> <!-- form-group// -->
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                         </div>
-                        <input class="form-control" placeholder="Confirm password" type="password">
+                        {{ form.confirm_password }}
                     </div> <!-- form-group// -->
                     <div class="form-group">
                         <button type="submit" class="btn btn-info btn-block"> Create Account</button>
                     </div> <!-- form-group// -->
-                    <p class="text-center">Have an account? <a href="login">Log In</a></p>
+                    <p class="text-center">Have an account? <a href="{% url 'accounts:login' %}">Log In</a></p>
                 </form>
             </article>
         </div> <!-- card.// -->

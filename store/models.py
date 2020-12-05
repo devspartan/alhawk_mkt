@@ -15,4 +15,3 @@ class Product(models.Model):
     description = models.CharField(max_length=1000, default='', blank=True, null=True)
     image = models.ImageField(upload_to='product/')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-

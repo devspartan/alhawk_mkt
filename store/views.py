@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from .models import Product, Category
 
 # Create your views here.
@@ -20,11 +19,3 @@ def index(request):
     data['products'] = products
     data['categories'] = categories
     return render(request, 'index.html', data)
-
-def signUp(request):
-
-    return render(request, 'signUp.html')
-
-def login(request):
-
-    return render(request, 'login.html')
