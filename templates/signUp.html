@@ -22,12 +22,23 @@
                 <p class="divider-text">
                     <span class="bg-light">OR</span>
                 </p>
-                <form  method="post">
+
+                {% for message in messages %}
+                    {% if message.level is DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <div class="alert alert-danger">
+                            <a class="close" href="#" data-dismiss="alert">×</a>
+                            {{ message }}
+                        </div>
+{#                    {% else %}#}
+{#                        <div class="alert alert-success">#}
+{#                            <a class="close" href="#" data-dismiss="alert">×</a>#}
+{#                            {{ message.errors }}#}
+{#                        </div>#}
+                    {% endif %}
+                {% endfor %}
+
+                <form method="post">
                     {% csrf_token %}
-
-
-                    <div class="alert alert-danger" role="alert">{{ error }}</div>
-
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -39,7 +50,7 @@
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                         </div>
                         {{ form.email }}
-{#                        {{ form.email.errors }}#}
+                        {#                        {{ form.email.errors }}#}
                     </div> <!-- form-group// -->
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
