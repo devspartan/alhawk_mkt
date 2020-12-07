@@ -12,26 +12,37 @@
 
                 <p>
                     <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-google"></i>   Login via Google</a>
-                    <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via
-                        facebook</a>
                 </p>
                 <p class="divider-text">
                     <span class="bg-light">OR</span>
                 </p>
+                {% for message in messages %}
+                    {% if message.level is DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <div class="alert alert-danger">
+                            <a class="close" href="#" data-dismiss="alert">×</a>
+                            {{ message }}
+                        </div>
+{#                    {% else %}#}
+{#                        <div class="alert alert-success">#}
+{#                            <a class="close" href="#" data-dismiss="alert">×</a>#}
+{#                            {{ message.errors }}#}
+{#                        </div>#}
+                    {% endif %}
+                {% endfor %}
                 <form method="post">
                     {% csrf_token %}
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                         </div>
-                        <input name="email" class="form-control" placeholder="Email address" type="email">
+                        {{ form.email }}
                     </div> <!-- form-group// -->
 
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                         </div>
-                        <input name="password" class="form-control" placeholder="Password" type="password">
+                        {{ form.password }}
                     </div> <!-- form-group// -->
 
                     <div class="form-group">

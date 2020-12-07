@@ -13,6 +13,13 @@
 
     <title>AlHawk Market</title>
 </head>
+<style>
+    .dropdown-menu {
+        min-width: 1rem;
+    }
+
+
+</style>
 <body>
 
 
@@ -26,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <span class="nav-link">{{ user.name }} <span class="sr-only">(current)</span></span>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Store</a>
@@ -36,14 +43,25 @@
             <li class="nav-item">
                 <a class="nav-link" href='/admin' tabindex="-1" aria-disabled="true">Admin</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href='{% url 'accounts:login' %}' tabindex="-1" aria-disabled="true">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Logout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href='{% url 'accounts:signup' %}' tabindex="-1" aria-disabled="true">Signup</a>
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown p-0">
+                    <a class="nav-link dropdown-toggle p-0" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="data:image/jpeg;base64,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"
+                             width="40" height="40" class="rounded-circle m-0 p-0">
+                    </a>
+                    {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href='{% url 'accounts:login' %}' tabindex="-1" aria-disabled="true">Sign In</a>
+                </li>
+            {% endif %}
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'accounts:user_profile' %}">Profile</a>
+                <a class="dropdown-item" href="#">Cart</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href={% url 'accounts:logout' %}>Log Out</a>
+            </div>
             </li>
         </ul>
 
