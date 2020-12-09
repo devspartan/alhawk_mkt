@@ -78,7 +78,6 @@ class User(AbstractBaseUser):
     phone_num = PhoneNumberField(default='')
     add = models.CharField(max_length=1000, null=True, blank=True)
     # notice the absence of a "Password field", that's built in.
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'phone_num']  # Email & Password are required by default.
 
@@ -114,3 +113,5 @@ class User(AbstractBaseUser):
     def is_admin(self):
         "Is the user a admin member?"
         return self.admin
+
+

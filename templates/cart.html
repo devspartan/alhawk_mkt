@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+<style>
+    .cart-image {
+
+    }
+
+
+</style>
+{% block content %}
+    <div class="container mt-5">
+        <div class="container-fluid">
+            {% for item in cart %}
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <div class="card">
+                            <div class="card-horizontal" style="display: flex; flex: 1 1 auto;">
+                                <div class="img-square-wrapper" style="width: 200px; height: 200px; display: flex">
+                                    <img class="mx-auto" style="margin: auto" src="{{ item.product.image.url }}"
+                                         alt="{{ item.product }}">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ item.product }}</h4>
+                                    <p class="card-text">{{ item.product.description }}</p>
+                                    <p class="card-text">Price: {{ item.product.price }}</p>
+                                    <p class="card-text">Quantity: {{ item.quantity }}</p>
+                                    <p class="card-text">Total: {{ item.get_total_by_product }}</p>
+
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div>{{ total }}</div>
+        </div>
+    </div>
+{% endblock %}

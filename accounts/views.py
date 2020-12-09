@@ -2,12 +2,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
-
+from django.views import View
 from .forms import CreateUserForm, LoginUserForm
 from .models import User
 
-
-# Create your views here.
 
 def signUpView(request):
     if request.method == 'POST':
@@ -38,7 +36,6 @@ def signUpView(request):
 
 def loginView(request):
     print(request.user, "user")
-    # print(request.session['user_email'])
     if request.method == 'POST':
         form = LoginUserForm(request.POST)
         if form.is_valid():
@@ -67,4 +64,5 @@ def logoutView(request):
     return redirect('store:index')
 
 def user_profile(request):
-    return render(request, 'user_profile.html')
+    user_obj = request.user
+    return render(request, 'user_profile.html', {'user_obj': user_obj})

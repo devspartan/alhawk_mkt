@@ -2,9 +2,7 @@
 
 {% block content %}
     <div class="container-fluid mt-5">
-
         <div class="row">
-
             <div class="col-lg-3">
                 <div class="wrapper">
                     <!-- Sidebar -->
@@ -22,10 +20,8 @@
                                     <li>
                                         <a href="#" class="list-group-item list-group-item-action">Home 1</a>
                                     </li>
-
                                 </ul>
                             </li>
-
                             <li>
                                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
                                    class="dropdown-toggle list-group-item list-group-item-action">Categories</a>
@@ -41,20 +37,16 @@
                                            class="list-group-item list-group-item-action">All</a>
                                     </li>
                                 </ul>
-
                             </li>
                             <li>
                                 <a href="#" class="list-group-item list-group-item-action">About</a>
                             </li>
-
                             <li>
                                 <a href="#" class="list-group-item list-group-item-action">Contact</a>
                             </li>
                         </ul>
                     </nav>
-
                 </div>
-
             </div>
 
             <div class="col-lg-8">
@@ -66,7 +58,11 @@
                             <div class="card-body">
                                 <h4 class="card-title">{{ product.name }}</h4>
                                 <p class="card-text">{{ product.price }} Rs</p>
-                                <a href="#" class="btn btn-light btn-sm border">Add to cart</a>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="text" name="product" hidden value="{{ product.id }}">
+                                    <button href="#" type="submit" class="btn btn-light btn-sm border">Add to cart</button>
+                                </form>
                             </div>
                         </div>
                     {% endfor %}
