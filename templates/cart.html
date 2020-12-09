@@ -4,6 +4,10 @@
 
     }
 
+    .button {
+        outline: none;
+        border: none;
+    }
 
 </style>
 {% block content %}
@@ -21,14 +25,24 @@
                                 <div class="card-body">
                                     <h4 class="card-title">{{ item.product }}</h4>
                                     <p class="card-text">{{ item.product.description }}</p>
-                                    <p class="card-text">Price: {{ item.product.price }}</p>
-                                    <p class="card-text">Quantity: {{ item.quantity }}</p>
+                                    <p class="card-text">Price: {{ item.product.price }}
+                                    </p>
+                                    <div style="display: flex">
+
+                                        <p class="card-text" >Quantity: {{ item.quantity }}</p>
+                                        <form method="post" style="margin-left: 5px">
+                                            {% csrf_token %}
+                                            <button value="{{ item.product.id }}" type="submit" name="decrease">-</button>
+                                            <button value="{{ item.product.id }}" type="submit" name="increase">+</button>
+                                        </form>
+                                    </div>
+
                                     <p class="card-text">Total: {{ item.get_total_by_product }}</p>
 
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
+                                <button class="btn btn-sm">Delete Item</button>
                             </div>
                         </div>
                     </div>
