@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product, Category
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from cart.models import CartItems
 from accounts.models import User
 from django.views import View
@@ -26,9 +28,8 @@ class Index(View):
         data['user'] = request.user
         return render(request, 'index.html', data)
 
-
+    # @method_decorator(login_required)
     def post(self, request):
-        print(request.user, request.POST['product'])
         user = User.objects.get(email=request.user)
         product = Product.objects.get(id=request.POST['product'])
         obj = None
@@ -36,8 +37,6 @@ class Index(View):
             obj = CartItems.objects.get(product=product, customer=user)
         except:
             pass
-        print(user, product, 'post_request')
-        print(obj, "hey mann")
         if obj:
             obj.quantity = obj.quantity+1
             obj.save()

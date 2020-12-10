@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
-from django.views import View
+# from django.views import View
 from .forms import CreateUserForm, LoginUserForm
 from .models import User
 

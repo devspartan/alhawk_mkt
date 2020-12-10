@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container mt-5">
+    <div class="container mt-5" style="position:relative; height: fit-content">
         <div class="container-fluid">
             {% for item in cart %}
                 <div class="row">
@@ -21,27 +21,42 @@
                                         <p class="card-text">Quantity: {{ item.quantity }}</p>
                                         <form method="post" style="margin-left: 5px">
                                             {% csrf_token %}
-                                            <button class="btn btn-light btn-sm border" value="{{ item.product.id }}" type="submit" name="decrease">-
+                                            <button class="btn btn-light btn-sm border" value="{{ item.product.id }}"
+                                                    type="submit" name="decrease">-
                                             </button>
-                                            <button class="btn btn-light btn-sm border" value="{{ item.product.id }}" type="submit" name="increase">+
+                                            <button class="btn btn-light btn-sm border" value="{{ item.product.id }}"
+                                                    type="submit" name="increase">+
                                             </button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex" style="justify-content: space-between">
-                                <form method="post" >
+                            <div class="card-footer d-flex" style="justify-content: space-between; padding: 6px 20px">
+                                <form method="post">
                                     {% csrf_token %}
-                                <button class="btn btn-light border btn-sm" type="submit" name="delete" value="{{ item.product.id }}" >Delete Item</button>
+                                    <button class="btn btn-light border btn-sm" type="submit" name="delete"
+                                            value="{{ item.product.id }}">Delete Item
+                                    </button>
                                 </form>
-                                    <div class="card-text">Total: {{ item.get_total_by_product }}</div>
-
+                                <div class="d-flex">
+                                    <div class="card-text" style="margin-top: 5px; margin-right: 10px">
+                                        Total: Rs {{ item.get_total_by_product }}</div>
+                                    <button class="btn btn-sm border btn-light">Checkout item</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-            <div>{{ total }}</div>
+            <div class="card-footer d-flex border-bottom mt-4" style="background-color: white; justify-content: space-between">
+                <div></div>
+                <div class="d-flex">
+                    <div class="card-text" style="margin-top: 5px; margin-right: 10px">Grand Total: Rs {{ total }}</div>
+                    <button class="btn btn-sm btn-light border">Checkout Now</button>
+                </div>
+
+
+            </div>
         </div>
     </div>
 {% endblock %}

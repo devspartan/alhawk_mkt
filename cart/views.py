@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, reverse
+from django.http import HttpResponseRedirect
 from django.views import View
 
 from .models import *
@@ -60,4 +61,5 @@ def cartView(request):
             pass
         data = get_user_cart(request)
 
-        return render(request, 'cart.html', data)
+        return HttpResponseRedirect(reverse('cartView', args=(data,)))
+        # return render(request, 'cart.html', data)
