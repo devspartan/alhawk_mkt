@@ -1,7 +1,6 @@
 from django.db import models
 from accounts.models import User
 from store.models import Product, Category
-# Create your models here.
 
 class Order(models.Model):
     customer = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)

@@ -4,7 +4,6 @@ from .models import Product, Category
 from cart.models import CartItems
 from accounts.models import User
 from django.views import View
-# Create your views here.
 
 class Index(View):
 

@@ -1,15 +1,5 @@
 {% extends 'base.html' %}
-<style>
-    .cart-image {
 
-    }
-
-    .button {
-        outline: none;
-        border: none;
-    }
-
-</style>
 {% block content %}
     <div class="container mt-5">
         <div class="container-fluid">
@@ -28,21 +18,24 @@
                                     <p class="card-text">Price: {{ item.product.price }}
                                     </p>
                                     <div style="display: flex">
-
-                                        <p class="card-text" >Quantity: {{ item.quantity }}</p>
+                                        <p class="card-text">Quantity: {{ item.quantity }}</p>
                                         <form method="post" style="margin-left: 5px">
                                             {% csrf_token %}
-                                            <button value="{{ item.product.id }}" type="submit" name="decrease">-</button>
-                                            <button value="{{ item.product.id }}" type="submit" name="increase">+</button>
+                                            <button class="btn btn-light btn-sm border" value="{{ item.product.id }}" type="submit" name="decrease">-
+                                            </button>
+                                            <button class="btn btn-light btn-sm border" value="{{ item.product.id }}" type="submit" name="increase">+
+                                            </button>
                                         </form>
                                     </div>
-
-                                    <p class="card-text">Total: {{ item.get_total_by_product }}</p>
-
                                 </div>
                             </div>
-                            <div class="card-footer">
-                                <button class="btn btn-sm">Delete Item</button>
+                            <div class="card-footer d-flex" style="justify-content: space-between">
+                                <form method="post" >
+                                    {% csrf_token %}
+                                <button class="btn btn-light border btn-sm" type="submit" name="delete" value="{{ item.product.id }}" >Delete Item</button>
+                                </form>
+                                    <div class="card-text">Total: {{ item.get_total_by_product }}</div>
+
                             </div>
                         </div>
                     </div>
